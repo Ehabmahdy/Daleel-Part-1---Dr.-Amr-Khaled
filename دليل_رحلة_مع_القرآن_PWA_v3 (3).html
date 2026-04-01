@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="دليل — رحلة مع القرآن">
+<title>دليل — رحلة مع القرآن | د. عمرو خالد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   DALEEL PWA — ألوان برنامج دليل
+   أخضر غامق + كريمي دافئ + ذهبي
+══════════════════════════════════════ */
+:root {
+  --green-dark:   #1a3d1f;
+  --green-mid:    #2a6134;
+  --green-bright: #3a8c48;
+  --green-light:  #4db560;
+  --green-pale:   #e8f5ea;
+  --green-dim:    rgba(42,97,52,0.12);
+  --cream:        #faf7f0;
+  --cream2:       #f2ece0;
+  --cream3:       #e8dfc8;
+  --warm-white:   #fffef9;
+  --gold:         #c8860a;
+  --gold-light:   #e8a020;
+  --gold-dim:     rgba(200,134,10,0.12);
+  --text-dark:    #111a12;
+  --text-mid:     #2d4a30;
+  --text-dim:     #6a8a6e;
+  --shadow:       0 2px 16px rgba(26,61,31,0.10);
+  --shadow-md:    0 6px 28px rgba(26,61,31,0.14);
+  --shadow-lg:    0 12px 48px rgba(26,61,31,0.18);
+  --radius:       16px;
+  --sidebar-w:    270px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: 'Tajawal', sans-serif;
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ══ SCROLLBAR ══ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream2); }
+::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 8px; }
+
+/* ══ SIDEBAR ══ */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--green-dark);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+/* Brand Header */
+.brand {
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: #0a1a0c;
+}
+.brand-full-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+.brand-name {
+  font-size: 12.5px;
+  color: var(--gold-light);
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 0 10px;
+  background: #0a1a0c;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  letter-spacing: 0.5px;
+}
+.brand-name {
+  font-size: 12px;
+  color: var(--gold-light);
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 8px;
+}
+
+/* Nav */
+.nav-section { padding: 12px 0; flex: 1; }
+.nav-label {
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 18px 4px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-right: 3px solid transparent;
+  transition: all .2s;
+  color: rgba(255,255,255,0.65);
+  font-size: 13.5px; font-weight: 500;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active {
+  background: rgba(74,181,96,0.15);
+  border-right-color: var(--green-light);
+  color: #fff;
+}
+.nav-item .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.nav-item .nav-cnt {
+  margin-right: auto;
+  font-size: 11px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+.nav-item.active .nav-cnt { background: rgba(74,181,96,0.25); color: var(--green-light); }
+
+/* Reciter */
+.reciter-box {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.reciter-label { font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.reciter-select {
+  width: 100%; padding: 7px 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.85);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 12.5px;
+  cursor: pointer;
+  direction: rtl;
+}
+.reciter-select option { background: #1a3d1f; color: #fff; }
+
+/* Mode toggle */
+.mode-box {
+  padding: 10px 16px 16px;
+  display: flex; gap: 6px;
+}
+.mode-btn {
+  flex: 1; padding: 7px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.mode-btn.active {
+  background: var(--green-mid);
+  border-color: var(--green-light);
+  color: #fff;
+}
+
+/* ══ MAIN ══ */
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* Topbar */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--warm-white);
+  border-bottom: 1.5px solid var(--cream3);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(26,61,31,0.07);
+}
+.topbar-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--green-dark);
+  font-family: 'Amiri', serif;
+}
+.topbar-sub { font-size: 12px; color: var(--text-dim); margin-top: 1px; }
+.topbar-right { display: flex; gap: 8px; align-items: center; }
+
+/* Search */
+.search-wrap {
+  position: relative;
+  margin: 16px 20px 0;
+}
+.search-input {
+  width: 100%; padding: 10px 38px 10px 14px;
+  background: var(--warm-white);
+  border: 1.5px solid var(--cream3);
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px; color: var(--text-dark);
+  transition: border-color .2s;
+  direction: rtl;
+}
+.search-input:focus { outline: none; border-color: var(--green-mid); }
+.search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 16px; pointer-events: none; }
+
+/* Filter chips */
+.chips { display: flex; gap: 8px; padding: 12px 20px 0; flex-wrap: wrap; }
+.chip {
+  padding: 5px 14px; border-radius: 20px;
+  border: 1.5px solid var(--cream3);
+  background: var(--warm-white);
+  color: var(--text-dim); font-size: 12.5px; font-weight: 600;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer; transition: all .2s;
+}
+.chip:hover { border-color: var(--green-mid); color: var(--green-mid); }
+.chip.active { background: var(--green-dim); border-color: var(--green-mid); color: var(--green-dark); }
+
+/* Stats */
+.stats-strip {
+  display: flex; gap: 10px;
+  padding: 14px 20px 0;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  background: var(--warm-white);
+  border: 1.5px solid var(--cream3);
+  border-radius: 12px;
+  padding: 8px 16px;
+  display: flex; align-items: baseline; gap: 6px;
+  box-shadow: var(--shadow);
+}
+.stat-n { font-size: 20px; font-weight: 800; color: var(--green-dark); }
+.stat-l { font-size: 11px; color: var(--text-dim); font-weight: 500; }
+
+/* Content */
+.content { padding: 16px 20px 100px; }
+.grid { display: grid; gap: 14px; }
+
+/* ══ DUA CARD ══ */
+.dua-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--cream3);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+  animation: cardIn .4s ease both;
+  box-shadow: var(--shadow);
+}
+@keyframes cardIn {
+  from { opacity:0; transform: translateY(14px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.dua-card:hover {
+  border-color: rgba(42,97,52,0.35);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.dua-card.is-playing {
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(42,97,52,0.12), var(--shadow-lg);
+}
+.dua-card.is-memorized {
+  border-color: var(--gold);
+  background: linear-gradient(to bottom left, #fffef9, #fdf5e0);
+}
+
+/* Card top */
+.card-top {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px 8px;
+}
+.dua-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+  color: #fff;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Tajawal', sans-serif;
+}
+.surah-ref { flex: 1; }
+.surah-name { font-size: 13.5px; font-weight: 700; color: var(--green-dark); }
+.ayah-badge {
+  display: inline-block;
+  font-size: 11px; color: var(--text-dim);
+  background: var(--cream2);
+  border-radius: 8px; padding: 1px 7px;
+  margin-top: 2px;
+}
+.card-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+
+/* Buttons */
+.play-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+  border: none; color: #fff; font-size: 13px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+  box-shadow: 0 2px 8px rgba(42,97,52,0.3);
+}
+.play-btn:hover { transform: scale(1.1); box-shadow: 0 4px 14px rgba(42,97,52,0.4); }
+.play-btn.playing { background: linear-gradient(135deg, #c0392b, #e74c3c); box-shadow: 0 2px 8px rgba(192,57,43,0.3); }
+
+.ic-btn {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  border: 1.5px solid var(--cream3);
+  background: var(--cream);
+  color: var(--text-dim);
+  cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.ic-btn:hover { border-color: var(--green-mid); color: var(--green-mid); background: var(--green-dim); }
+.ic-btn.green-active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.ic-btn.copied { border-color: var(--green-mid); color: var(--green-mid); background: var(--green-dim); }
+
+/* Card body */
+.card-body { padding: 0 14px 10px; position: relative; }
+.wave-bar {
+  display: none;
+  gap: 3px; align-items: flex-end; height: 16px; margin-bottom: 6px;
+}
+.is-playing .wave-bar { display: flex; }
+.wave-bar span {
+  width: 3px; background: var(--green-bright); border-radius: 2px;
+  animation: wave 1.1s ease-in-out infinite;
+}
+.wave-bar span:nth-child(1){height:5px;animation-delay:0s}
+.wave-bar span:nth-child(2){height:12px;animation-delay:.1s}
+.wave-bar span:nth-child(3){height:8px;animation-delay:.2s}
+.wave-bar span:nth-child(4){height:14px;animation-delay:.3s}
+.wave-bar span:nth-child(5){height:6px;animation-delay:.4s}
+.wave-bar span:nth-child(6){height:10px;animation-delay:.5s}
+.wave-bar span:nth-child(7){height:7px;animation-delay:.15s}
+@keyframes wave {
+  0%,100%{transform:scaleY(1)}
+  50%{transform:scaleY(1.8)}
+}
+
+.dua-text {
+  font-family: 'Amiri', serif;
+  font-size: 17px; line-height: 2.0;
+  color: var(--text-dark);
+  direction: rtl; text-align: right;
+}
+
+/* Episode strip */
+.ep-strip {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 6px 14px 8px;
+}
+.ep-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600;
+  color: var(--green-dark);
+  background: var(--green-pale);
+  border: 1.5px solid rgba(42,97,52,0.22);
+  border-radius: 20px; padding: 4px 12px;
+  text-decoration: none;
+  transition: all .2s;
+  direction: rtl;
+  font-family: 'Tajawal', sans-serif;
+}
+.ep-link:hover {
+  background: var(--green-dim);
+  border-color: var(--green-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(42,97,52,0.15);
+}
+.ep-link .yt-dot {
+  width: 18px; height: 18px;
+  background: #e53935;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 9px;
+  flex-shrink: 0;
+}
+
+.audio-err { font-size: 11px; color: #c0392b; padding: 4px 14px 6px; display: none; }
+
+/* Card foot */
+.card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px 12px;
+  border-top: 1px solid var(--cream2);
+}
+.counter-pill {
+  display: flex; align-items: center; gap: 6px;
+}
+.cnt-btn {
+  width: 26px; height: 26px; border-radius: 7px;
+  border: 1.5px solid var(--cream3);
+  background: var(--cream);
+  color: var(--text-mid); font-size: 15px;
+  cursor: pointer; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.cnt-btn:hover { background: var(--green-dim); border-color: var(--green-mid); color: var(--green-dark); }
+.cnt-val { font-size: 15px; font-weight: 700; color: var(--green-dark); min-width: 22px; text-align: center; }
+.cnt-label { font-size: 11px; color: var(--text-dim); }
+.read-label { font-size: 11px; color: var(--text-dim); font-style: italic; }
+
+/* Progress */
+.prog-track { height: 3px; background: var(--cream2); }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-light)); transition: width .5s ease; }
+
+/* Bump animation */
+@keyframes bump { 0%{transform:scale(1)} 50%{transform:scale(1.35)} 100%{transform:scale(1)} }
+.bump { animation: bump .25s ease; }
+
+/* ══ EMPTY STATE ══ */
+.empty {
+  text-align: center; padding: 60px 20px;
+  color: var(--text-dim);
+}
+.empty .ico { font-size: 48px; margin-bottom: 12px; }
+
+/* ══ PLAY-ALL BTN ══ */
+.play-all-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--green-mid);
+  background: var(--green-dim);
+  color: var(--green-dark);
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px; font-weight: 600;
+  transition: all .2s;
+}
+.play-all-btn:hover { background: rgba(42,97,52,0.2); box-shadow: 0 4px 14px rgba(42,97,52,0.15); }
+
+/* ══ FLOAT BAR ══ */
+.float-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--green-dark);
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+  padding: 10px 24px;
+  display: flex; align-items: center; gap: 16px;
+  z-index: 200;
+  box-shadow: 0 -4px 20px rgba(26,61,31,0.25);
+}
+.now-playing-strip {
+  display: flex; align-items: center; gap: 8px;
+  flex: 1; opacity: 0; transition: opacity .3s;
+  min-width: 0;
+}
+.now-playing-strip.visible { opacity: 1; }
+.np-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-light); animation: pulse 1.5s infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.now-playing-strip span { font-size: 12px; color: rgba(255,255,255,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.float-div { width: 1px; height: 20px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.float-stat { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.float-n { font-size: 16px; font-weight: 800; color: #fff; line-height: 1; }
+.float-l { font-size: 10px; color: rgba(255,255,255,0.5); }
+.reset-btn {
+  padding: 6px 14px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent; color: rgba(255,255,255,0.5);
+  font-family: 'Tajawal', sans-serif; font-size: 12px;
+  cursor: pointer; transition: all .2s; flex-shrink: 0;
+}
+.reset-btn:hover { border-color: #e74c3c; color: #e74c3c; }
+
+/* ══ TOAST ══ */
+#toast {
+  position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--green-dark); color: #fff;
+  padding: 10px 22px; border-radius: 30px;
+  font-size: 13px; font-weight: 600;
+  opacity: 0; transition: all .3s; pointer-events: none;
+  z-index: 500; white-space: nowrap;
+  box-shadow: 0 6px 24px rgba(26,61,31,0.35);
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ══ MOBILE ══ */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .topbar { padding: 12px 16px; }
+  .content { padding: 12px 12px 90px; }
+  .stats-strip { padding: 12px 12px 0; }
+  .search-wrap { margin: 12px 12px 0; }
+  .chips { padding: 10px 12px 0; }
+}
+
+/* ══ EPISODE NAV ══ */
+.ep-nav {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  border-right: 3px solid transparent;
+  transition: all .2s;
+  color: rgba(255,255,255,0.65);
+  font-size: 12.5px;
+}
+.ep-nav:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.ep-nav.active { background: rgba(74,181,96,0.15); border-right-color: var(--green-light); color: #fff; }
+.ep-nav .ep-num {
+  width: 22px; height: 22px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ep-nav.active .ep-num { background: var(--green-mid); }
+.ep-nav .ep-title { flex: 1; font-weight: 500; }
+.ep-nav .ep-time { font-size: 10px; color: rgba(255,255,255,0.3); }
+
+.ep-section-label {
+  font-size: 10px; color: rgba(255,255,255,0.3);
+  padding: 10px 18px 4px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+}
+.ep-scroll-area { flex: 1; overflow-y: auto; }
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <div class="brand">
+    <img src="data:image/jpeg;base64,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" class="brand-full-img" alt="دليل رحلة مع القرآن">
+    <div class="brand-name">✦ د. عمرو خالد ✦</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">عرض</div>
+    <div class="nav-item active" id="navAll" onclick="switchView('all')">
+      <span class="nav-icon">🌿</span>
+      <span>جميع الأدعية</span>
+      <span class="nav-cnt" id="allCount">٠</span>
+    </div>
+    <div class="nav-item" id="navMem" onclick="switchView('memorized')">
+      <span class="nav-icon">⭐</span>
+      <span>محفوظة</span>
+    </div>
+
+    <div class="nav-label" style="margin-top:8px">مواضيع البرنامج</div>
+    <div id="topicNav"></div>
+
+    <div class="nav-label" style="margin-top:8px">حلقات البرنامج</div>
+    <div id="epNav"></div>
+  </div>
+
+  <div class="reciter-box">
+    <div class="reciter-label">القارئ</div>
+    <select class="reciter-select" id="reciterSelect" onchange="changeReciter(this.value)">
+      <option value="Alafasy_128kbps">مشاري راشد العفاسي</option>
+      <option value="Abdul_Basit_Murattal_192kbps">عبد الباسط — مرتّل</option>
+      <option value="Abdurrahmaan_As-Sudais_192kbps">عبد الرحمن السديس</option>
+      <option value="Maher_Al_Muaiqly_128kbps">ماهر المعيقلي</option>
+      <option value="Husary_128kbps">الحصري — مرتّل</option>
+      <option value="Yasser_Ad-Dussary_128kbps">ياسر الدوسري</option>
+      <option value="ahmed_ibn_ali_al_ajamy_128kbps">أحمد العجمي</option>
+    </select>
+  </div>
+  <div class="mode-box">
+    <button class="mode-btn active" id="modeSingle" onclick="setPlayMode('single')">دعاء واحد</button>
+    <button class="mode-btn" id="modeAll" onclick="setPlayMode('all')">تشغيل كلي</button>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="topbarTitle">جميع الأدعية</div>
+      <div class="topbar-sub" id="topbarSub">أدعية برنامج دليل — رحلة مع القرآن</div>
+    </div>
+    <div class="topbar-right" id="topbarRight"></div>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchBox" type="text" placeholder="ابحث في الأدعية..." oninput="renderAll()">
+  </div>
+
+  <div class="chips" id="chipsRow">
+    <div class="chip active" data-filter="all" onclick="setFilter(this)">الكل</div>
+    <div class="chip" data-filter="memorized" onclick="setFilter(this)">محفوظة</div>
+    <div class="chip" data-filter="other" onclick="setFilter(this)">غير محفوظة</div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-pill"><span class="stat-n" id="s-mem">٠</span><span class="stat-l">محفوظة</span></div>
+    <div class="stat-pill"><span class="stat-n" id="s-rec">٠</span><span class="stat-l">إجمالي التلاوات</span></div>
+    <div class="stat-pill"><span class="stat-n" id="s-pct">٠٪</span><span class="stat-l">نسبة التقدم</span></div>
+  </div>
+
+  <div class="content">
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<!-- Float bar -->
+<div class="float-bar">
+  <div class="now-playing-strip" id="npStrip">
+    <div class="np-dot"></div>
+    <span id="npName"></span>
+  </div>
+  <div class="float-div" id="npDiv" style="display:none"></div>
+  <div class="float-stat"><span class="float-n" id="f-rec">٠</span><span class="float-l">تلاوات</span></div>
+  <div class="float-div"></div>
+  <div class="float-stat"><span class="float-n" id="f-mem">٠</span><span class="float-l">محفوظة</span></div>
+  <div class="float-div"></div>
+  <button class="reset-btn" onclick="resetAll()">↺ إعادة تعيين</button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ════════ DATA ════════ */
+const BASE = "https://everyayah.com/data/";
+function ayahUrl(s,a){ return BASE+currentReciter+'/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3'; }
+const toAr = n => String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+
+/* أدعية البرنامج فقط — مرتبة حسب الحلقة */
+const DUAS = [
+  /* ح١ */  {text:"رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَل لِّي مِن لَّدُنكَ سُلْطَانًا نَّصِيرًا", surah:"الإسراء", ayah:"٨٠", surahN:17, ayahStart:80, ayahEnd:80,
+    eps:[{n:1, url:"https://youtu.be/ktFf-tx199s", t:"39:41"}]},
+
+  /* ح٢ */  {text:"رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا ۞ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا", surah:"البقرة", ayah:"٢٨٦", surahN:2, ayahStart:286, ayahEnd:286,
+    eps:[{n:2, url:"https://youtu.be/tIzzQ_Vozgg", t:"38:16"}]},
+  /* ح٢ */  {text:"رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", surah:"البقرة", ayah:"٢٨٦", surahN:2, ayahStart:286, ayahEnd:286,
+    eps:[{n:2, url:"https://youtu.be/tIzzQ_Vozgg", t:"38:16"}]},
+
+  /* ح٣ */  {text:"لَا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ ۞ رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنتَ خَيْرُ الْوَارِثِينَ", surah:"الأنبياء", ayah:"٨٧-٨٩", surahN:21, ayahStart:87, ayahEnd:89,
+    eps:[{n:3, url:"https://youtu.be/suHSTxetwwE", t:"40:29"},{n:5, url:"https://youtu.be/2CYT179DZJg", t:"30:35"}]},
+
+  /* ح٤+١٥ */ {text:"رَبِّ اشْرَحْ لِي صَدْرِي ۞ وَيَسِّرْ لِي أَمْرِي ۞ وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي ۞ يَفْقَهُوا قَوْلِي ۞ رَبِّ زِدْنِي عِلْمًا", surah:"طه", ayah:"٢٥-٢٨، ١١٤", surahN:20, ayahStart:25, ayahEnd:28, ayahExtra:[{surahN:20,ayahStart:114,ayahEnd:114}],
+    eps:[{n:4, url:"https://youtu.be/7-uPlkqCmyQ", t:"39:14"},{n:15, url:"https://youtu.be/VdF5Ym-IYEI", t:"36:47"}]},
+
+  /* ح٦ */  {text:"رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ", surah:"القصص", ayah:"٢٤", surahN:28, ayahStart:24, ayahEnd:24,
+    eps:[{n:6, url:"https://youtu.be/gFz80tbvJbk", t:"40:48"}]},
+
+  /* ح٧+٨ */ {text:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً إِنَّكَ أَنتَ الْوَهَّابُ", surah:"آل عمران", ayah:"٨", surahN:3, ayahStart:8, ayahEnd:8,
+    eps:[{n:7, url:"https://youtu.be/syV0OOS7uBU", t:"35:45"},{n:8, url:"https://youtu.be/3wnftccKJ34", t:"41:18"}]},
+
+  /* ح٨ */  {text:"رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا", surah:"الكهف", ayah:"١٠", surahN:18, ayahStart:10, ayahEnd:10,
+    eps:[{n:8, url:"https://youtu.be/3wnftccKJ34", t:"41:18"}]},
+
+  /* ح٩ */  {text:"رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ", surah:"الأعراف", ayah:"٢٣", surahN:7, ayahStart:23, ayahEnd:23,
+    eps:[{n:9, url:"https://youtu.be/UUSdKB_4Q40", t:"38:17"}]},
+
+  /* ح١٠ */ {text:"رَبِّ أَنزِلْنِي مُنزَلًا مُّبَارَكًا وَأَنتَ خَيْرُ الْمُنزِلِينَ", surah:"المؤمنون", ayah:"٢٩", surahN:23, ayahStart:29, ayahEnd:29,
+    eps:[{n:10, url:"https://youtu.be/v3Q_KXXJGzQ", t:"34:45"}]},
+
+  /* ح١١ */ {text:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", surah:"البقرة", ayah:"٢٠١", surahN:2, ayahStart:201, ayahEnd:201,
+    eps:[{n:11, url:"https://youtu.be/CBsz9zL27yI", t:"34:58"}]},
+
+  /* ح١٢ */ {text:"رَبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا ۞ رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ", surah:"آل عمران", ayah:"١٩٣", surahN:3, ayahStart:193, ayahEnd:193,
+    eps:[{n:12, url:"https://youtu.be/wWCMHh4mkQQ", t:"35:29"}]},
+
+  /* ح١٣ */ {text:"حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ", surah:"التوبة", ayah:"١٢٩", surahN:9, ayahStart:129, ayahEnd:129,
+    eps:[{n:13, url:"https://youtu.be/iW5n2VSlBCE", t:"39:37"}]},
+
+  /* ح١٦ */ {text:"رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ", surah:"التحريم", ayah:"٨", surahN:66, ayahStart:8, ayahEnd:8,
+    eps:[{n:16, url:"https://youtu.be/uSdRWkqaDe8", t:"32:53"}]},
+
+  /* ح١٧ */ {text:"رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ", surah:"البقرة", ayah:"٢٥٠", surahN:2, ayahStart:250, ayahEnd:250,
+    eps:[{n:17, url:"https://youtu.be/ov7FNg9fKf0", t:"31:41"}]},
+
+  /* ح١٨ */ {text:"رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءَ ۞ رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ", surah:"إبراهيم", ayah:"٤٠-٤١", surahN:14, ayahStart:40, ayahEnd:41,
+    eps:[{n:18, url:"https://youtu.be/nMyK7nVNdj0", t:"30:39"}]},
+
+  /* ح١٩ */ {text:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا", surah:"الفرقان", ayah:"٧٤", surahN:25, ayahStart:74, ayahEnd:74,
+    eps:[{n:19, url:"https://youtu.be/RX6hdC0RjSk", t:"38:03"}]},
+
+  /* ح٢٥ */ {text:"رَبِّ اغْفِرْ لِي وَهَبْ لِي مُلْكًا لَّا يَنبَغِي لِأَحَدٍ مِّن بَعْدِي إِنَّكَ أَنتَ الْوَهَّابُ", surah:"ص", ayah:"٣٥", surahN:38, ayahStart:35, ayahEnd:35,
+    eps:[{n:25, url:"https://youtu.be/hBZEVsO0RuE", t:"37:48"}]},
+];
+
+/* مواضيع مبنية على أدعية البرنامج فقط */
+const TOPICS = [
+  { id:'tawba',   icon:'🌿', name:'التوبة والمغفرة',      desc:'الاستغفار وطلب العفو',         indices:[1,2,8,11,12,16] },
+  { id:'sabr',    icon:'⚓', name:'الصبر والثبات',        desc:'عند الشدائد والمحن',            indices:[0,6,14] },
+  { id:'ilm',     icon:'📚', name:'العلم والانشراح',      desc:'لطلب العلم وشرح الصدر',        indices:[3] },
+  { id:'dhurriya',icon:'👨‍👩‍👧', name:'الذرية والأسرة',      desc:'لطلب الذرية الصالحة',          indices:[15,16] },
+  { id:'hidaya',  icon:'🌟', name:'الهداية وتثبيت القلب',desc:'للثبات على الدين',              indices:[6,7,12] },
+  { id:'noor',    icon:'✨', name:'النور والتوكل',         desc:'توكل على الله والنور',          indices:[13,12] },
+  { id:'rizq',    icon:'🌾', name:'الرزق والخير',          desc:'طلب الخير والرزق الحلال',      indices:[10,4,16] },
+  { id:'dawaa',   icon:'🤲', name:'الكرب والضيق',          desc:'الدعاء عند الضيق',              indices:[3,8,9,12] },
+  { id:'dunyaakhira', icon:'🌙', name:'الدنيا والآخرة',    desc:'جوامع الدعاء',                 indices:[10,11,13] },
+];
+
+/* حلقات فيها دعاء محدد */
+const EPISODES = [
+  {n:1,  url:"https://youtu.be/ktFf-tx199s", title:"ثلاثية لحل ضيق الحياة", t:"39:41", duas:[0]},
+  {n:2,  url:"https://youtu.be/tIzzQ_Vozgg", title:"خواتيم سورة البقرة",    t:"38:16", duas:[1,2]},
+  {n:3,  url:"https://youtu.be/suHSTxetwwE", title:"دعاء يونس عليه السلام", t:"40:29", duas:[3]},
+  {n:4,  url:"https://youtu.be/7-uPlkqCmyQ", title:"دعاء سورة طه",          t:"39:14", duas:[4]},
+  {n:5,  url:"https://youtu.be/2CYT179DZJg", title:"رب لا تذرني فرداً",     t:"30:35", duas:[3]},
+  {n:6,  url:"https://youtu.be/gFz80tbvJbk", title:"دعاء موسى عليه السلام", t:"40:48", duas:[5]},
+  {n:7,  url:"https://youtu.be/syV0OOS7uBU", title:"دعاء آل عمران ٨",       t:"35:45", duas:[6]},
+  {n:8,  url:"https://youtu.be/3wnftccKJ34", title:"الكهف وآل عمران",       t:"41:18", duas:[6,7]},
+  {n:9,  url:"https://youtu.be/UUSdKB_4Q40", title:"دعاء آدم وحواء",        t:"38:17", duas:[8]},
+  {n:10, url:"https://youtu.be/v3Q_KXXJGzQ", title:"رب أنزلني منزلاً مبارك",t:"34:45", duas:[9]},
+  {n:11, url:"https://youtu.be/CBsz9zL27yI", title:"ربنا آتنا في الدنيا",   t:"34:58", duas:[10]},
+  {n:12, url:"https://youtu.be/wWCMHh4mkQQ", title:"دعاء آل عمران ١٩٣",    t:"35:29", duas:[11]},
+  {n:13, url:"https://youtu.be/iW5n2VSlBCE", title:"حسبي الله",              t:"39:37", duas:[12]},
+  {n:15, url:"https://youtu.be/VdF5Ym-IYEI", title:"رب زدني علماً",         t:"36:47", duas:[4]},
+  {n:16, url:"https://youtu.be/uSdRWkqaDe8", title:"ربنا أتمم لنا نورنا",   t:"32:53", duas:[13]},
+  {n:17, url:"https://youtu.be/ov7FNg9fKf0", title:"ربنا أفرغ علينا صبراً", t:"31:41", duas:[14]},
+  {n:18, url:"https://youtu.be/nMyK7nVNdj0", title:"دعاء إبراهيم عليه السلام",t:"30:39",duas:[15]},
+  {n:19, url:"https://youtu.be/RX6hdC0RjSk", title:"ربنا هب لنا من أزواجنا",t:"38:03", duas:[16]},
+  {n:25, url:"https://youtu.be/hBZEVsO0RuE", title:"دعاء سليمان عليه السلام",t:"37:48",duas:[17]},
+];
+
+/* ════════ State ════════ */
+const N = DUAS.length;
+let counters  = JSON.parse(localStorage.getItem('dal_cnt')||'null') || Array(N).fill(0);
+let memorized = JSON.parse(localStorage.getItem('dal_mem')||'null') || Array(N).fill(false);
+if(counters.length!==N)  counters  = Array(N).fill(0);
+if(memorized.length!==N) memorized = Array(N).fill(false);
+
+let currentReciter = localStorage.getItem('dal_reciter') || 'Alafasy_128kbps';
+let playMode       = localStorage.getItem('dal_mode')    || 'single';
+let currentView    = 'all';
+let filter         = 'all';
+let currentAudio   = null;
+let playingIdx     = -1;
+let ayahQueue = [], queuePos = 0;
+let allQueue = [], allQueuePos = 0;
+let topicQueue = [], topicQueuePos = 0;
+
+function save() {
+  localStorage.setItem('dal_cnt', JSON.stringify(counters));
+  localStorage.setItem('dal_mem', JSON.stringify(memorized));
+}
+
+/* ════════ Navigation ════════ */
+function buildTopicNav() {
+  const nav = document.getElementById('topicNav');
+  nav.innerHTML = TOPICS.map(t => `
+    <div class="nav-item" id="tnav-${t.id}" onclick="switchView('${t.id}')">
+      <span class="nav-icon">${t.icon}</span>
+      <span>${t.name}</span>
+      <span class="nav-cnt">${toAr(t.indices.length)}</span>
+    </div>`).join('');
+}
+
+function buildEpNav() {
+  const nav = document.getElementById('epNav');
+  nav.innerHTML = EPISODES.map(e => `
+    <div class="ep-nav" id="enav-${e.n}" onclick="switchView('ep${e.n}')">
+      <span class="ep-num">${toAr(e.n)}</span>
+      <span class="ep-title">${e.title}</span>
+    </div>`).join('');
+}
+
+function switchView(view) {
+  stopAudio(true);
+  currentView = view;
+  filter = 'all';
+
+  document.getElementById('navAll').classList.toggle('active', view==='all');
+  document.getElementById('navMem').classList.toggle('active', view==='memorized');
+  TOPICS.forEach(t => { const el=document.getElementById('tnav-'+t.id); if(el) el.classList.toggle('active', view===t.id); });
+  EPISODES.forEach(e => { const el=document.getElementById('enav-'+e.n); if(el) el.classList.toggle('active', view==='ep'+e.n); });
+
+  const chipsRow = document.getElementById('chipsRow');
+  const searchWrap = document.querySelector('.search-wrap');
+
+  if(view==='all') {
+    document.getElementById('topbarTitle').textContent = 'جميع الأدعية';
+    document.getElementById('topbarRight').innerHTML = '';
+    chipsRow.style.display=''; searchWrap.style.display='';
+    renderAll();
+  } else if(view==='memorized') {
+    document.getElementById('topbarTitle').textContent = 'الأدعية المحفوظة';
+    document.getElementById('topbarRight').innerHTML = '';
+    chipsRow.style.display='none'; searchWrap.style.display='none';
+    renderMemorized();
+  } else if(view.startsWith('ep')) {
+    const epNum = parseInt(view.slice(2));
+    const ep = EPISODES.find(e=>e.n===epNum);
+    document.getElementById('topbarTitle').textContent = `الحلقة ${toAr(epNum)} — ${ep.title}`;
+    document.getElementById('topbarRight').innerHTML = `
+      <a href="${ep.url}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:10px;background:#e53935;color:#fff;text-decoration:none;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;gap:6px;">
+        <span style="font-size:16px">▶</span> مشاهدة الحلقة ${toAr(epNum)} كاملة
+      </a>`;
+    chipsRow.style.display='none'; searchWrap.style.display='none';
+    renderEpisode(ep);
+  } else {
+    const t = TOPICS.find(t=>t.id===view);
+    if(t) {
+      document.getElementById('topbarTitle').textContent = `${t.icon} ${t.name}`;
+      document.getElementById('topbarRight').innerHTML = `
+        <button class="play-all-btn" onclick="playTopicAll()">⏭ تشغيل الكل</button>`;
+      chipsRow.style.display='none'; searchWrap.style.display='none';
+      renderTopic(t);
+    }
+  }
+  updateTopbarSub();
+}
+
+function updateTopbarSub() {
+  const cards = document.querySelectorAll('.dua-card');
+  document.getElementById('topbarSub').textContent = `${toAr(cards.length)} دعاء — برنامج دليل · د. عمرو خالد`;
+}
+
+/* ════════ Render ════════ */
+function renderAll() {
+  const q = (document.getElementById('searchBox')||{}).value || '';
+  const grid = document.getElementById('grid');
+  const visible = DUAS.map((d,i)=>({d,i})).filter(({d,i})=>{
+    if(filter==='memorized'&&!memorized[i]) return false;
+    if(filter==='other'&&memorized[i])      return false;
+    if(q&&!d.text.includes(q)&&!d.surah.includes(q)) return false;
+    return true;
+  });
+  document.getElementById('allCount').textContent = toAr(visible.length);
+  if(!visible.length){ grid.innerHTML=`<div class="empty"><div class="ico">🔍</div><p>لا توجد نتائج</p></div>`; return; }
+  grid.innerHTML = visible.map(({d,i},ai)=>cardHTML(d,i,ai*0.035)).join('');
+  updateStats();
+}
+
+function renderMemorized() {
+  const grid = document.getElementById('grid');
+  const visible = DUAS.map((d,i)=>({d,i})).filter(({_,i})=>memorized[i]);
+  if(!visible.length){ grid.innerHTML=`<div class="empty"><div class="ico">⭐</div><p>لم تحفظ أي دعاء بعد</p></div>`; return; }
+  grid.innerHTML = visible.map(({d,i},ai)=>cardHTML(d,i,ai*0.04)).join('');
+}
+
+function renderTopic(topic) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = topic.indices.map((idx,ai)=>cardHTML(DUAS[idx],idx,ai*0.04)).join('');
+  updateStats();
+}
+
+function renderEpisode(ep) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = ep.duas.map((idx,ai)=>cardHTML(DUAS[idx],idx,ai*0.04)).join('');
+}
+
+/* ════════ Card HTML ════════ */
+function cardHTML(d, i, delay) {
+  const pct   = Math.min(counters[i]/33*100,100);
+  const isMem = memorized[i];
+  const isPlay= playingIdx===i;
+  const epsHTML = d.eps && d.eps.length
+    ? `<div class="ep-strip">${d.eps.map(e=>`
+        <a class="ep-link" href="${e.url}" target="_blank" rel="noopener">
+          <span class="yt-dot">▶</span>
+          لمشاهدة الحلقة ${toAr(e.n)} كاملة · د${e.t}
+        </a>`).join('')}</div>`
+    : '';
+  return `
+  <div class="dua-card${isMem?' is-memorized':''}${isPlay?' is-playing':''}" data-idx="${i}" style="animation-delay:${delay}s">
+    <div class="card-top">
+      <div class="dua-num">${toAr(i+1)}</div>
+      <div class="surah-ref">
+        <div class="surah-name">سورة ${d.surah}</div>
+        <span class="ayah-badge">آية ${d.ayah}</span>
+      </div>
+      <div class="card-actions">
+        <button class="play-btn${isPlay?' playing':''}" onclick="playDua(${i})">${isPlay?'⏸':'▶'}</button>
+        <button class="ic-btn" onclick="copyDua(${i},this)" title="نسخ">📋</button>
+        <button class="ic-btn${isMem?' green-active':''}" onclick="toggleMem(${i})" title="${isMem?'إلغاء الحفظ':'حفظ'}">${isMem?'⭐':'☆'}</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="dua-text">${d.text}</div>
+    </div>
+    <div class="audio-err">⚠ تعذّر تحميل الصوت</div>
+    ${epsHTML}
+    <div class="card-foot">
+      <div class="counter-pill">
+        <button class="cnt-btn" onclick="dec(${i})">−</button>
+        <span class="cnt-val">${toAr(counters[i])}</span>
+        <button class="cnt-btn" onclick="inc(${i})">+</button>
+        <span class="cnt-label">مرة</span>
+      </div>
+      <span class="read-label">${counters[i]>0?`قرأتَ ${toAr(counters[i])} مرة`:''}</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+  </div>`;
+}
+
+/* ════════ Audio ════════ */
+function buildAyahList(d){
+  const list=[];
+  for(let a=d.ayahStart;a<=d.ayahEnd;a++) list.push({surahN:d.surahN,ayahN:a});
+  if(d.ayahExtra) d.ayahExtra.forEach(seg=>{ for(let a=seg.ayahStart;a<=seg.ayahEnd;a++) list.push({surahN:seg.surahN,ayahN:a}); });
+  return list;
+}
+
+function playDua(idx) {
+  if(playingIdx===idx){ stopAudio(true); return; }
+  if(currentAudio){currentAudio.pause();currentAudio.src='';currentAudio=null;}
+  if(playingIdx>=0) markPlay(playingIdx,false);
+  playingIdx=-1; ayahQueue=[]; queuePos=0; updateNP();
+  if(playMode!=='all'||allQueue.length===0){ allQueue=[]; allQueuePos=0; }
+  else { const pos=allQueue.indexOf(idx); if(pos!==-1) allQueuePos=pos; }
+  playingIdx=idx; ayahQueue=buildAyahList(DUAS[idx]); queuePos=0;
+  markPlay(idx,true); updateNP();
+  nextInQueue(idx);
+}
+
+function nextInQueue(idx) {
+  if(playingIdx!==idx) return;
+  if(queuePos>=ayahQueue.length){
+    markPlay(idx,false); playingIdx=-1; ayahQueue=[]; queuePos=0; updateNP();
+    if(topicQueue.length>0){
+      topicQueuePos++;
+      if(topicQueuePos<topicQueue.length) setTimeout(()=>playDua(topicQueue[topicQueuePos]),600);
+      else{ showToast('✅ انتهت أدعية الموضوع'); topicQueue=[]; topicQueuePos=0; }
+      return;
+    }
+    if(playMode==='all'&&allQueue.length>0){
+      allQueuePos++;
+      if(allQueuePos<allQueue.length) setTimeout(()=>playDua(allQueue[allQueuePos]),600);
+      else{ showToast('✅ انتهت جميع الأدعية'); allQueue=[]; allQueuePos=0; }
+    }
+    return;
+  }
+  const item=ayahQueue[queuePos];
+  currentAudio=new Audio(ayahUrl(item.surahN,item.ayahN));
+  currentAudio.addEventListener('ended',()=>{queuePos++;nextInQueue(idx);});
+  currentAudio.addEventListener('error',()=>{
+    queuePos++;
+    if(queuePos>=ayahQueue.length){
+      markPlay(idx,false); playingIdx=-1; ayahQueue=[]; queuePos=0; updateNP();
+      if(topicQueue.length>0){ topicQueuePos++; if(topicQueuePos<topicQueue.length) setTimeout(()=>playDua(topicQueue[topicQueuePos]),600); else{ topicQueue=[]; topicQueuePos=0; } return; }
+      if(playMode==='all'&&allQueue.length>0){ allQueuePos++; if(allQueuePos<allQueue.length) setTimeout(()=>playDua(allQueue[allQueuePos]),600); else{ allQueue=[]; allQueuePos=0; } }
+      else showAudioErr(idx);
+    } else nextInQueue(idx);
+  });
+  currentAudio.play().catch(()=>{queuePos++;nextInQueue(idx);});
+}
+
+function playTopicAll(){
+  const t=TOPICS.find(t=>t.id===currentView); if(!t) return;
+  stopAudio(true);
+  topicQueue=[...t.indices]; topicQueuePos=0;
+  showToast('⏭ تشغيل: '+t.name);
+  playDua(topicQueue[0]);
+}
+
+function stopAudio(clearAll=true){
+  if(currentAudio){currentAudio.pause();currentAudio.src='';currentAudio=null;}
+  if(playingIdx>=0){markPlay(playingIdx,false);playingIdx=-1;}
+  ayahQueue=[];queuePos=0;
+  if(clearAll){allQueue=[];allQueuePos=0;topicQueue=[];topicQueuePos=0;}
+  updateNP();
+}
+
+function markPlay(idx,on){
+  const card=document.querySelector(`[data-idx="${idx}"]`);
+  if(!card)return;
+  card.classList.toggle('is-playing',on);
+  const btn=card.querySelector('.play-btn');
+  if(btn){btn.classList.toggle('playing',on);btn.textContent=on?'⏸':'▶';}
+}
+function showAudioErr(idx){
+  const c=document.querySelector(`[data-idx="${idx}"]`); if(!c)return;
+  const e=c.querySelector('.audio-err'); if(e){e.style.display='block';setTimeout(()=>e.style.display='none',4000);}
+}
+function updateNP(){
+  const strip=document.getElementById('npStrip');
+  const div=document.getElementById('npDiv');
+  if(playingIdx>=0){
+    const d=DUAS[playingIdx];
+    document.getElementById('npName').textContent=`سورة ${d.surah} — آية ${d.ayah}`;
+    strip.classList.add('visible'); if(div)div.style.display='';
+  } else { strip.classList.remove('visible'); if(div)div.style.display='none'; }
+}
+
+/* ════════ Settings ════════ */
+function changeReciter(folder){
+  currentReciter=folder; localStorage.setItem('dal_reciter',folder);
+  stopAudio(true); showToast('🎙️ '+(folder.replace(/_/g,' ')));
+}
+function setPlayMode(mode){
+  playMode=mode; localStorage.setItem('dal_mode',mode);
+  document.getElementById('modeSingle').classList.toggle('active',mode==='single');
+  document.getElementById('modeAll').classList.toggle('active',mode==='all');
+  if(mode==='all'&&playingIdx===-1){
+    stopAudio(true);
+    const cards=[...document.querySelectorAll('.dua-card')];
+    allQueue=cards.map(c=>parseInt(c.dataset.idx)).filter(i=>!isNaN(i));
+    allQueuePos=0;
+    if(allQueue.length){ showToast('▶ تشغيل كلي — '+toAr(allQueue.length)+' دعاء'); playDua(allQueue[0]); }
+  }
+}
+function setFilter(el){
+  filter=el.dataset.filter;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  renderAll();
+}
+
+/* ════════ Counter ════════ */
+function inc(idx){
+  counters[idx]++; save();
+  const c=document.querySelector(`[data-idx="${idx}"]`); if(!c)return;
+  const v=c.querySelector('.cnt-val'); if(v){v.textContent=toAr(counters[idx]);v.classList.remove('bump');void v.offsetWidth;v.classList.add('bump');}
+  const f=c.querySelector('.prog-fill'); if(f)f.style.width=Math.min(counters[idx]/33*100,100)+'%';
+  const rl=c.querySelector('.read-label'); if(rl)rl.textContent=counters[idx]>0?`قرأتَ ${toAr(counters[idx])} مرة`:'';
+  updateStats();
+}
+function dec(idx){
+  if(counters[idx]<=0)return; counters[idx]--; save();
+  const c=document.querySelector(`[data-idx="${idx}"]`); if(!c)return;
+  const v=c.querySelector('.cnt-val'); if(v)v.textContent=toAr(counters[idx]);
+  const f=c.querySelector('.prog-fill'); if(f)f.style.width=Math.min(counters[idx]/33*100,100)+'%';
+  const rl=c.querySelector('.read-label'); if(rl)rl.textContent=counters[idx]>0?`قرأتَ ${toAr(counters[idx])} مرة`:'';
+  updateStats();
+}
+function toggleMem(idx){
+  memorized[idx]=!memorized[idx]; save(); updateStats();
+  if(currentView==='all') renderAll();
+  else if(currentView==='memorized') renderMemorized();
+  else if(currentView.startsWith('ep')){ const ep=EPISODES.find(e=>e.n===parseInt(currentView.slice(2))); if(ep) renderEpisode(ep); }
+  else { const t=TOPICS.find(t=>t.id===currentView); if(t) renderTopic(t); }
+}
+function copyDua(idx,btn){
+  navigator.clipboard.writeText(DUAS[idx].text).then(()=>{
+    btn.classList.add('copied'); btn.textContent='✓';
+    showToast('تم نسخ الدعاء ✓');
+    setTimeout(()=>{btn.classList.remove('copied');btn.textContent='📋';},2000);
+  });
+}
+
+/* ════════ Stats ════════ */
+function updateStats(){
+  const tot=counters.reduce((a,b)=>a+b,0);
+  const mem=memorized.filter(Boolean).length;
+  const pct=Math.round(mem/N*100);
+  document.getElementById('s-mem').textContent=toAr(mem);
+  document.getElementById('s-rec').textContent=toAr(tot);
+  document.getElementById('s-pct').textContent=toAr(pct)+'٪';
+  document.getElementById('f-rec').textContent=toAr(tot);
+  document.getElementById('f-mem').textContent=toAr(mem);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
+function resetAll(){
+  if(!confirm('هل تريد إعادة تعيين جميع العدادات؟'))return;
+  counters.fill(0); save(); updateStats();
+  renderAll(); showToast('تم إعادة تعيين العدادات ✓');
+}
+
+/* ════════ Init ════════ */
+(function(){
+  buildTopicNav();
+  buildEpNav();
+  document.getElementById('reciterSelect').value = currentReciter;
+  setPlayMode(playMode);
+  switchView('all');
+})();
+</script>
+</body>
+</html>
